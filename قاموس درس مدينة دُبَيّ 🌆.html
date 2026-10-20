@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قاموس درس مدينة دُبَيّ 🌆</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#e8f4fd 0%,#f0f8ff 50%,#e8f0fd 100%);min-height:100vh;direction:rtl}
+
+/* ── Hero ── */
+.hero{background:linear-gradient(135deg,#0369a1,#0ea5e9,#38bdf8);padding:28px 24px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30px;left:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero::after{content:'';position:absolute;bottom:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero-icon{font-size:46px;margin-bottom:8px;display:block}
+.hero h1{color:#fff;font-size:24px;font-weight:700;margin-bottom:5px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hero p{color:rgba(255,255,255,.88);font-size:13px;margin-bottom:14px}
+.audio-test-btn{background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.5);padding:7px 20px;border-radius:50px;font-size:13px;cursor:pointer;backdrop-filter:blur(4px);transition:all .2s;font-family:inherit}
+.audio-test-btn:hover{background:rgba(255,255,255,.35)}
+
+/* ── Paragraph Section ── */
+.para-section{background:#fff;margin:0;border-bottom:1px solid #bae6fd;padding:20px}
+.para-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center}
+.para-header h2{font-size:16px;font-weight:700;color:#0369a1}
+.para-badge{background:linear-gradient(135deg,#0369a1,#0ea5e9);color:#fff;font-size:11px;padding:3px 10px;border-radius:50px}
+.para-box{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1.5px solid #7dd3fc;border-radius:14px;padding:18px 20px;position:relative}
+.para-box p{font-size:15px;line-height:2;color:#1e3a5f;direction:rtl;text-align:right}
+.para-box .highlight{color:#0369a1;font-weight:700}
+.para-listen-btn{display:flex;align-items:center;gap:8px;margin-top:14px;background:linear-gradient(135deg,#0369a1,#0ea5e9);color:#fff;border:none;border-radius:50px;padding:9px 20px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .2s;box-shadow:0 2px 8px rgba(3,105,161,.3)}
+.para-listen-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(3,105,161,.4)}
+.para-listen-btn.playing-anim{animation:pulse-btn .7s ease-in-out infinite}
+@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(3,105,161,.5)}50%{box-shadow:0 0 0 10px rgba(3,105,161,0)}}
+
+/* ── Controls ── */
+.controls{padding:14px 18px;background:#fff;border-bottom:1px solid #bae6fd;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(3,105,161,.08)}
+.search-wrap{position:relative;margin-bottom:10px}
+.search-wrap input{width:100%;padding:9px 42px 9px 14px;border:1.5px solid #7dd3fc;border-radius:50px;font-size:14px;outline:none;background:#f0f9ff;color:#1e3a5f;transition:border .2s;font-family:inherit;direction:rtl}
+.search-wrap input:focus{border-color:#0369a1;background:#fff}
+.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:17px;color:#0369a1}
+.count{text-align:center;font-size:12px;color:#0ea5e9;margin-bottom:9px}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.ftag{padding:5px 14px;border-radius:50px;border:1.5px solid #7dd3fc;background:#f0f9ff;color:#0369a1;cursor:pointer;font-size:12px;font-weight:500;transition:all .2s;white-space:nowrap;font-family:inherit}
+.ftag:hover{border-color:#0369a1;background:#e0f2fe}
+.ftag.active{background:linear-gradient(135deg,#0369a1,#0ea5e9);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(3,105,161,.3)}
+
+/* ── Legend ── */
+.legend{padding:10px 18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;border-bottom:1px solid #bae6fd;background:#fff}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#1e3a5f}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:13px;padding:18px}
+
+/* ── Cards ── */
+.card{background:#fff;border-radius:16px;border:1.5px solid #bae6fd;padding:16px 12px 12px;text-align:center;cursor:pointer;transition:all .2s;position:relative;box-shadow:0 2px 8px rgba(3,105,161,.05)}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(3,105,161,.18);border-color:#0ea5e9}
+.card.playing{border-color:#0369a1;box-shadow:0 0 0 3px rgba(3,105,161,.2),0 8px 22px rgba(3,105,161,.18)}
+.card-icon{width:52px;height:52px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:26px;background:linear-gradient(135deg,#e0f2fe,#bae6fd)}
+.card-word{font-size:16px;font-weight:700;color:#1e3a5f;margin-bottom:4px;line-height:1.4}
+.card-en{display:inline-block;padding:3px 11px;border-radius:50px;font-size:11px;font-weight:600;color:#fff;background:linear-gradient(135deg,#0369a1,#0ea5e9);margin-bottom:7px}
+.card-ex{font-size:12px;color:#1e6a8f;line-height:1.6;min-height:34px}
+.audio-btn{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#0369a1,#0ea5e9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:7px auto 0;transition:all .2s;box-shadow:0 2px 7px rgba(3,105,161,.3)}
+.audio-btn:hover{transform:scale(1.1);box-shadow:0 4px 13px rgba(3,105,161,.45)}
+.audio-btn svg{width:13px;height:13px;fill:#fff}
+.audio-btn.playing-anim{animation:pulse-ring .6s ease-in-out infinite}
+@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 0 rgba(3,105,161,.5)}50%{box-shadow:0 0 0 8px rgba(3,105,161,0)}}
+
+/* ── Category badge ── */
+.cat-badge{position:absolute;top:8px;left:8px;width:9px;height:9px;border-radius:50%}
+.cat-lesson{background:#0369a1}
+.cat-noun{background:#f59e0b}
+.cat-adj{background:#10b981}
+.cat-verb{background:#6366f1}
+.cat-opinion{background:#ec4899}
+.cat-agree{background:#059669}
+.cat-disagree{background:#dc2626}
+.cat-connect{background:#7c3aed}
+.cat-question{background:#f97316}
+
+/* ── Section divider ── */
+.section-divider{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin:6px 0 2px}
+.section-divider span{font-size:13px;font-weight:700;color:#0369a1;white-space:nowrap}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1.5px;background:linear-gradient(to left,#bae6fd,transparent)}
+.section-divider::after{background:linear-gradient(to right,#bae6fd,transparent)}
+
+/* ── Card variants ── */
+.noun-section{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fcd34d}
+.noun-section .card-en{background:linear-gradient(135deg,#d97706,#f59e0b)}
+.adj-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac}
+.adj-section .card-en{background:linear-gradient(135deg,#059669,#10b981)}
+.verb-section{background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1.5px solid #c4b5fd}
+.verb-section .card-en{background:linear-gradient(135deg,#6d28d9,#8b5cf6)}
+.opinion-section{background:linear-gradient(135deg,#fff0f5,#ffe4ef);border:1.5px solid #fbb6ce}
+.opinion-section .card-en{background:linear-gradient(135deg,#be185d,#ec4899)}
+.agree-section{background:linear-gradient(135deg,#f0fff4,#dcfce7);border:1.5px solid #86efac}
+.agree-section .card-en{background:linear-gradient(135deg,#047857,#059669)}
+.disagree-section{background:linear-gradient(135deg,#fff0f0,#fee2e2);border:1.5px solid #fca5a5}
+.disagree-section .card-en{background:linear-gradient(135deg,#b91c1c,#dc2626)}
+.question-section{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1.5px solid #fdba74}
+.question-section .card-en{background:linear-gradient(135deg,#c2410c,#f97316)}
+.connect-section{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1.5px solid #7dd3fc}
+.connect-section .card-en{background:linear-gradient(135deg,#0369a1,#0ea5e9)}
+
+.no-results{grid-column:1/-1;text-align:center;padding:40px;color:#0ea5e9;font-size:16px}
+
+footer{text-align:center;padding:18px;font-size:12px;color:#7dd3fc}
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <span class="hero-icon">🌆</span>
+  <h1>قَامُوسُ دَرسِ مَدِينَةِ دُبَيَّ 🌆</h1>
+  <p>كَلِمَاتٌ مُهِمَّةٌ لِلتَّحَدُّثِ وَالْكِتَابَةِ · اضغط 🔊 لِسَمَاعِ الْكَلِمَةِ وَالْمِثَالِ</p>
+  <button class="audio-test-btn" onclick="testAudio()">🔊 اختبار الصوت</button>
+</div>
+
+<!-- ── Paragraph Section ── -->
+<div class="para-section">
+  <div class="para-header">
+    <h2>📖 الْفِقْرَةُ الْأَسَاسِيَّةُ</h2>
+    <span class="para-badge">اقرأ واستمع</span>
+  </div>
+  <div class="para-box">
+    <p>
+      <span class="highlight">مَدِينَةُ دُبَيَّ</span><br>
+      مَرْحَبًا! أَنَا اسْمِي حَمْدَانُ، أُحِبُّ <span class="highlight">مَدِينَةَ دُبَيَّ</span>؛ لِأَنَّهَا <span class="highlight">جَمِيلَةٌ</span> وَ<span class="highlight">نَظِيفَةٌ</span> وَ<span class="highlight">آمِنَةٌ</span>.<br>
+      هُنَاكَ الْعَدِيدُ مِنَ <span class="highlight">الْمَعَالِمِ السِّيَاحِيَّةِ</span> فِي دُبَيَّ، نَذْكُرُ <span class="highlight">عَلَى سَبِيلِ الْمِثَالِ</span>: <span class="highlight">بُرْجَ خَلِيفَةَ</span>، وَ<span class="highlight">بُرْجَ الْعَرَبِ</span>، وَ<span class="highlight">مُتْحَفَ الْمُسْتَقْبَلِ</span>.<br>
+      <span class="highlight">فِي رَأْيِي</span>، دُبَيُّ مَدِينَةٌ <span class="highlight">رَائِعَةٌ</span>. <span class="highlight">أُفَضِّلُ</span> دُبَيَّ؛ لِأَنَّهَا جَمِيلَةٌ وَفِيهَا <span class="highlight">أَمَاكِنُ كَثِيرَةٌ لِلزِّيَارَةِ</span>.<br>
+      <span class="highlight">أَتَّفِقُ مَعَكَ</span> أَنَّ دُبَيَّ مَدِينَةٌ جَمِيلَةٌ، وَلَكِنِّي <span class="highlight">أَخْتَلِفُ مَعَ</span> مَنْ يَقُولُ إِنَّهَا مَدِينَةٌ <span class="highlight">مُمِلَّةٌ</span>.
+    </p>
+    <button class="para-listen-btn" id="paraBtn" onclick="listenPara()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      🔊 استمع إلى الفقرة كاملة
+    </button>
+  </div>
+</div>
+
+<!-- ── Controls ── -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="ابحث عن كلمة..." oninput="filterCards()">
+  </div>
+  <div class="count" id="countLabel">جميع الكلمات</div>
+  <div class="filter-row" id="filterRow"></div>
+</div>
+
+<!-- ── Legend ── -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#0369a1"></div>كلمات الدرس</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#f59e0b"></div>الأسماء</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#10b981"></div>الصفات</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#6366f1"></div>الأفعال</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ec4899"></div>عبارات الرأي</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#059669"></div>الاتفاق</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>الاختلاف</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#7c3aed"></div>أدوات الربط</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#f97316"></div>الاستفهام</div>
+</div>
+
+<div class="grid" id="cardsGrid"></div>
+<footer>🌆 قاموس مدينة دبي · الصف الخامس · AE · 2026</footer>
+
+<script>
+const WORDS = [
+  // ── كلمات الدرس الرئيسية ──
+  {id:1,ar:'مَدِينَةٌ',en:'City',ex:'دُبَيُّ مَدِينَةٌ جَمِيلَةٌ.',cat:'lesson',icon:'🌆'},
+  {id:2,ar:'أُحِبُّ',en:'I love / like',ex:'أُحِبُّ مَدِينَةَ دُبَيَّ.',cat:'lesson',icon:'❤️'},
+  {id:3,ar:'جَمِيلَةٌ',en:'Beautiful',ex:'دُبَيُّ مَدِينَةٌ جَمِيلَةٌ.',cat:'lesson',icon:'✨'},
+  {id:4,ar:'نَظِيفَةٌ',en:'Clean',ex:'دُبَيُّ مَدِينَةٌ نَظِيفَةٌ.',cat:'lesson',icon:'🧼'},
+  {id:5,ar:'آمِنَةٌ',en:'Safe',ex:'دُبَيُّ مَدِينَةٌ آمِنَةٌ.',cat:'lesson',icon:'🛡️'},
+  {id:6,ar:'مَعَالِمُ سِيَاحِيَّةٌ',en:'Tourist Landmarks',ex:'فِي دُبَيَّ مَعَالِمُ سِيَاحِيَّةٌ.',cat:'lesson',icon:'📍'},
+  {id:7,ar:'عَلَى سَبِيلِ الْمِثَالِ',en:'For example',ex:'عَلَى سَبِيلِ الْمِثَالِ: بُرْجُ خَلِيفَةَ.',cat:'lesson',icon:'💡'},
+  {id:8,ar:'بُرْجُ خَلِيفَةَ',en:'Burj Khalifa',ex:'أَزُورُ بُرْجَ خَلِيفَةَ.',cat:'lesson',icon:'🏙️'},
+  {id:9,ar:'بُرْجُ الْعَرَبِ',en:'Burj Al Arab',ex:'بُرْجُ الْعَرَبِ مَعْلَمٌ مَشْهُورٌ.',cat:'lesson',icon:'⛵'},
+  {id:10,ar:'مُتْحَفُ الْمُسْتَقْبَلِ',en:'Museum of the Future',ex:'أُشَاهِدُ مُتْحَفَ الْمُسْتَقْبَلِ.',cat:'lesson',icon:'🔮'},
+  {id:11,ar:'رَائِعَةٌ',en:'Wonderful',ex:'فِي رَأْيِي، دُبَيُّ رَائِعَةٌ.',cat:'lesson',icon:'🌟'},
+  {id:12,ar:'أُفَضِّلُ',en:'I prefer',ex:'أُفَضِّلُ دُبَيَّ.',cat:'lesson',icon:'⭐'},
+  {id:13,ar:'أَمَاكِنُ كَثِيرَةٌ',en:'Many places',ex:'فِيهَا أَمَاكِنُ كَثِيرَةٌ.',cat:'lesson',icon:'🗺️'},
+  {id:14,ar:'لِلزِّيَارَةِ',en:'For visiting',ex:'فِيهَا أَمَاكِنُ لِلزِّيَارَةِ.',cat:'lesson',icon:'🎟️'},
+  {id:15,ar:'مُمِلَّةٌ',en:'Boring',ex:'دُبَيُّ لَيْسَتْ مُمِلَّةً.',cat:'lesson',icon:'😑'},
+
+  // ── الأسماء ──
+  {id:20,ar:'مَعْلَمٌ',en:'Landmark',ex:'بُرْجُ خَلِيفَةَ مَعْلَمٌ مَشْهُورٌ.',cat:'noun',icon:'📌'},
+  {id:21,ar:'بُرْجٌ',en:'Tower',ex:'هَذَا بُرْجٌ عَالٍ.',cat:'noun',icon:'🏗️'},
+  {id:22,ar:'مُتْحَفٌ',en:'Museum',ex:'أَزُورُ مُتْحَفًا جَمِيلًا.',cat:'noun',icon:'🏛️'},
+  {id:23,ar:'زِيَارَةٌ',en:'Visit',ex:'أُحِبُّ زِيَارَةَ دُبَيَّ.',cat:'noun',icon:'🎫'},
+  {id:24,ar:'مَكَانٌ',en:'Place',ex:'هَذَا مَكَانٌ جَمِيلٌ.',cat:'noun',icon:'📍'},
+  {id:25,ar:'سِيَاحَةٌ',en:'Tourism',ex:'السِّيَاحَةُ فِي دُبَيَّ مُمْتِعَةٌ.',cat:'noun',icon:'✈️'},
+  {id:26,ar:'صَدِيقٌ',en:'Friend',ex:'أَزُورُ دُبَيَّ مَعَ صَدِيقِي.',cat:'noun',icon:'👫'},
+  {id:27,ar:'شَارِعٌ',en:'Street',ex:'الشَّارِعُ نَظِيفٌ وَجَمِيلٌ.',cat:'noun',icon:'🛣️'},
+
+  // ── الصفات ──
+  {id:30,ar:'جَمِيلٌ / جَمِيلَةٌ',en:'Beautiful',ex:'الْمَكَانُ جَمِيلٌ.',cat:'adj',icon:'🌸'},
+  {id:31,ar:'نَظِيفٌ / نَظِيفَةٌ',en:'Clean',ex:'الشَّارِعُ نَظِيفٌ.',cat:'adj',icon:'✅'},
+  {id:32,ar:'آمِنٌ / آمِنَةٌ',en:'Safe',ex:'دُبَيُّ آمِنَةٌ.',cat:'adj',icon:'🛡️'},
+  {id:33,ar:'رَائِعٌ / رَائِعَةٌ',en:'Wonderful',ex:'دُبَيُّ رَائِعَةٌ.',cat:'adj',icon:'⭐'},
+  {id:34,ar:'مَشْهُورٌ / مَشْهُورَةٌ',en:'Famous',ex:'بُرْجُ خَلِيفَةَ مَشْهُورٌ.',cat:'adj',icon:'🌟'},
+  {id:35,ar:'عَالٍ / عَالِيَةٌ',en:'Tall / High',ex:'بُرْجُ خَلِيفَةَ عَالٍ جِدًّا.',cat:'adj',icon:'📏'},
+  {id:36,ar:'حَدِيثٌ / حَدِيثَةٌ',en:'Modern',ex:'دُبَيُّ مَدِينَةٌ حَدِيثَةٌ.',cat:'adj',icon:'🔬'},
+  {id:37,ar:'مُمْتِعٌ / مُمْتِعَةٌ',en:'Enjoyable',ex:'الزِّيَارَةُ مُمْتِعَةٌ.',cat:'adj',icon:'😊'},
+  {id:38,ar:'كَبِيرٌ / كَبِيرَةٌ',en:'Big / Large',ex:'دُبَيُّ مَدِينَةٌ كَبِيرَةٌ.',cat:'adj',icon:'🏙️'},
+
+  // ── الأفعال ──
+  {id:40,ar:'أُحِبُّ',en:'I love / like',ex:'أُحِبُّ دُبَيَّ.',cat:'verb',icon:'❤️'},
+  {id:41,ar:'أُفَضِّلُ',en:'I prefer',ex:'أُفَضِّلُ زِيَارَةَ بُرْجِ خَلِيفَةَ.',cat:'verb',icon:'⭐'},
+  {id:42,ar:'أَزُورُ',en:'I visit',ex:'أَزُورُ مُتْحَفَ الْمُسْتَقْبَلِ.',cat:'verb',icon:'🎫'},
+  {id:43,ar:'أُشَاهِدُ',en:'I see / watch',ex:'أُشَاهِدُ الْمَعَالِمَ.',cat:'verb',icon:'👀'},
+  {id:44,ar:'أَذْهَبُ',en:'I go',ex:'أَذْهَبُ إِلَى دُبَيَّ.',cat:'verb',icon:'🚶'},
+  {id:45,ar:'أَصِفُ',en:'I describe',ex:'أَصِفُ مَدِينَةَ دُبَيَّ.',cat:'verb',icon:'📝'},
+  {id:46,ar:'أَتَّفِقُ',en:'I agree',ex:'أَتَّفِقُ مَعَكَ.',cat:'verb',icon:'🤝'},
+  {id:47,ar:'أَخْتَلِفُ',en:'I disagree',ex:'أَخْتَلِفُ مَعَكَ بِأَدَبٍ.',cat:'verb',icon:'🔄'},
+  {id:48,ar:'أَعْتَقِدُ',en:'I believe',ex:'أَعْتَقِدُ أَنَّ دُبَيَّ آمِنَةٌ.',cat:'verb',icon:'💭'},
+  {id:49,ar:'يَقُولُ',en:'He says',ex:'هُوَ يَقُولُ إِنَّ دُبَيَّ جَمِيلَةٌ.',cat:'verb',icon:'🗣️'},
+
+  // ── عبارات الرأي ──
+  {id:50,ar:'فِي رَأْيِي،',en:'In my opinion,',ex:'فِي رَأْيِي، دُبَيُّ مَدِينَةٌ رَائِعَةٌ.',cat:'opinion',icon:'💭'},
+  {id:51,ar:'أَنَا أَرَى أَنَّ',en:'I think that',ex:'أَنَا أَرَى أَنَّ دُبَيَّ جَمِيلَةٌ.',cat:'opinion',icon:'🧠'},
+  {id:52,ar:'أُحِبُّ ... لِأَنَّ',en:'I like ... because',ex:'أُحِبُّ دُبَيَّ لِأَنَّهَا جَمِيلَةٌ.',cat:'opinion',icon:'💡'},
+  {id:53,ar:'أَعْتَقِدُ أَنَّ',en:'I believe that',ex:'أَعْتَقِدُ أَنَّ دُبَيَّ آمِنَةٌ.',cat:'opinion',icon:'🎯'},
+  {id:54,ar:'أَظُنُّ أَنَّ',en:'I think that',ex:'أَظُنُّ أَنَّ دُبَيَّ مُمْتِعَةٌ.',cat:'opinion',icon:'🤔'},
+
+  // ── عبارات الاتفاق ──
+  {id:60,ar:'أَتَّفِقُ مَعَكَ',en:'I agree with you',ex:'أَتَّفِقُ مَعَكَ؛ دُبَيُّ جَمِيلَةٌ.',cat:'agree',icon:'✅'},
+  {id:61,ar:'أَنَا مُتَّفِقٌ مَعَكَ',en:'I agree with you',ex:'أَنَا مُتَّفِقٌ مَعَكَ فِي الرَّأْيِ.',cat:'agree',icon:'🤝'},
+  {id:62,ar:'بِالتَّأْكِيدِ',en:'Absolutely / Sure',ex:'بِالتَّأْكِيدِ، دُبَيُّ رَائِعَةٌ!',cat:'agree',icon:'💯'},
+  {id:63,ar:'نَعَمْ، أَتَّفِقُ',en:'Yes, I agree',ex:'نَعَمْ، أَتَّفِقُ مَعَكَ تَمَامًا.',cat:'agree',icon:'👍'},
+
+  // ── عبارات الاختلاف ──
+  {id:70,ar:'أَخْتَلِفُ مَعَكَ',en:'I disagree with you',ex:'أَخْتَلِفُ مَعَكَ بِأَدَبٍ.',cat:'disagree',icon:'🔄'},
+  {id:71,ar:'لَكِنَّنِي أَرَى أَنَّ',en:'But I think that',ex:'لَكِنَّنِي أَرَى أَنَّ دُبَيَّ رَائِعَةٌ.',cat:'disagree',icon:'↔️'},
+  {id:72,ar:'لَا أُوَافِقُ هَذَا الرَّأْيَ',en:'I don\'t agree',ex:'لَا أُوَافِقُ هَذَا الرَّأْيَ.',cat:'disagree',icon:'🙅'},
+  {id:73,ar:'وَلَكِنِّي أَخْتَلِفُ',en:'But I disagree',ex:'أَتَّفِقُ وَلَكِنِّي أَخْتَلِفُ فِي شَيْءٍ.',cat:'disagree',icon:'🤏'},
+
+  // ── أدوات الاستفهام ──
+  {id:80,ar:'مَا؟',en:'What?',ex:'مَا اسْمُ هَذَا الْمَعْلَمِ؟',cat:'question',icon:'❓'},
+  {id:81,ar:'أَيْنَ؟',en:'Where?',ex:'أَيْنَ يَقَعُ بُرْجُ خَلِيفَةَ؟',cat:'question',icon:'📍'},
+  {id:82,ar:'مَتَى؟',en:'When?',ex:'مَتَى تُحِبُّ زِيَارَةَ دُبَيَّ؟',cat:'question',icon:'⏰'},
+  {id:83,ar:'كَيْفَ؟',en:'How?',ex:'كَيْفَ تَصِفُ دُبَيَّ؟',cat:'question',icon:'🤷'},
+  {id:84,ar:'لِمَاذَا؟',en:'Why?',ex:'لِمَاذَا تُحِبُّ دُبَيَّ؟',cat:'question',icon:'🔍'},
+  {id:85,ar:'هَلْ؟',en:'Do / Is ...?',ex:'هَلْ زُرْتَ بُرْجَ خَلِيفَةَ؟',cat:'question',icon:'❔'},
+  {id:86,ar:'كَمْ؟',en:'How many?',ex:'كَمْ مَعْلَمًا تَعْرِفُ فِي دُبَيَّ؟',cat:'question',icon:'🔢'},
+  {id:87,ar:'مَنْ؟',en:'Who?',ex:'مَنْ زَارَ مُتْحَفَ الْمُسْتَقْبَلِ؟',cat:'question',icon:'👤'},
+
+  // ── أدوات الربط ──
+  {id:90,ar:'وَ',en:'And',ex:'دُبَيُّ جَمِيلَةٌ وَنَظِيفَةٌ.',cat:'connect',icon:'➕'},
+  {id:91,ar:'لِأَنَّ',en:'Because',ex:'أُحِبُّ دُبَيَّ لِأَنَّهَا جَمِيلَةٌ.',cat:'connect',icon:'🔗'},
+  {id:92,ar:'وَلَكِنْ',en:'But',ex:'دُبَيُّ كَبِيرَةٌ، وَلَكِنَّهَا آمِنَةٌ.',cat:'connect',icon:'↔️'},
+  {id:93,ar:'أَيْضًا',en:'Also',ex:'فِيهَا مُتْحَفٌ وَفِيهَا أَيْضًا أَبْرَاجٌ.',cat:'connect',icon:'📎'},
+  {id:94,ar:'مِثْلُ',en:'Such as / Like',ex:'فِيهَا مَعَالِمُ مِثْلُ بُرْجِ خَلِيفَةَ.',cat:'connect',icon:'🔁'},
+  {id:95,ar:'ثُمَّ',en:'Then',ex:'أَزُورُ الْبُرْجَ ثُمَّ أَذْهَبُ إِلَى الْمُتْحَفِ.',cat:'connect',icon:'➡️'},
+  {id:96,ar:'لِذَلِكَ',en:'Therefore',ex:'دُبَيُّ جَمِيلَةٌ؛ لِذَلِكَ أُحِبُّهَا.',cat:'connect',icon:'💫'},
+];
+
+const CATS = {
+  all:     {label:'🔮 الكل',cls:''},
+  lesson:  {label:'✨ كلمات الدرس',cls:''},
+  noun:    {label:'🏙️ الأسماء',cls:'noun-section'},
+  adj:     {label:'💚 الصفات',cls:'adj-section'},
+  verb:    {label:'💜 الأفعال',cls:'verb-section'},
+  opinion: {label:'🩷 عبارات الرأي',cls:'opinion-section'},
+  agree:   {label:'💚 الاتفاق',cls:'agree-section'},
+  disagree:{label:'❤️ الاختلاف',cls:'disagree-section'},
+  question:{label:'🟠 الاستفهام',cls:'question-section'},
+  connect: {label:'🔵 أدوات الربط',cls:'connect-section'},
+};
+
+const catNames = {
+  lesson:'✨ كلمات الدرس الرئيسية',
+  noun:'🏙️ الأسماء',
+  adj:'💚 الصفات',
+  verb:'💜 الأفعال',
+  opinion:'🩷 عبارات الرأي',
+  agree:'💚 عبارات الاتفاق',
+  disagree:'❤️ عبارات الاختلاف',
+  question:'🟠 أدوات الاستفهام',
+  connect:'🔵 أدوات الربط'
+};
+
+const catOrder = ['lesson','noun','adj','verb','opinion','agree','disagree','question','connect'];
+
+let currentCat = 'all';
+const synth = window.speechSynthesis;
+let currentPlayingCard = null;
+
+function getVoice(){
+  const voices = synth.getVoices();
+  return voices.find(v=>v.lang.startsWith('ar')) || null;
+}
+
+function speak(text, cardEl){
+  if(synth.speaking) synth.cancel();
+  if(currentPlayingCard){
+    currentPlayingCard.classList.remove('playing');
+    const btn = currentPlayingCard.querySelector('.audio-btn');
+    if(btn) btn.classList.remove('playing-anim');
+    currentPlayingCard = null;
+  }
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'ar-AE';
+  utt.rate = 0.82;
+  utt.pitch = 1;
+  const v = getVoice();
+  if(v) utt.voice = v;
+  if(cardEl){
+    currentPlayingCard = cardEl;
+    cardEl.classList.add('playing');
+    const btn = cardEl.querySelector('.audio-btn');
+    if(btn) btn.classList.add('playing-anim');
+    utt.onend = ()=>{
+      cardEl.classList.remove('playing');
+      if(btn) btn.classList.remove('playing-anim');
+      currentPlayingCard = null;
+    };
+  }
+  synth.speak(utt);
+}
+
+function listenPara(){
+  const paraText = `مدينة دبي. مرحبا! أنا اسمي حمدان، أحب مدينة دبي؛ لأنها جميلة ونظيفة وآمنة. هناك العديد من المعالم السياحية في دبي، نذكر على سبيل المثال: برج خليفة، وبرج العرب، ومتحف المستقبل. في رأيي، دبي مدينة رائعة. أفضل دبي؛ لأنها جميلة وفيها أماكن كثيرة للزيارة. أتفق معك أن دبي مدينة جميلة، ولكني أختلف مع من يقول إنها مدينة مملة.`;
+  const btn = document.getElementById('paraBtn');
+  if(synth.speaking){ synth.cancel(); btn.classList.remove('playing-anim'); return; }
+  const utt = new SpeechSynthesisUtterance(paraText);
+  utt.lang = 'ar-AE'; utt.rate = 0.78; utt.pitch = 1;
+  const v = getVoice(); if(v) utt.voice = v;
+  btn.classList.add('playing-anim');
+  utt.onend = ()=>{ btn.classList.remove('playing-anim'); };
+  synth.speak(utt);
+}
+
+function testAudio(){
+  speak('مرحبا! هذا اختبار للصوت. قاموس مدينة دبي.');
+}
+
+function playWord(id){
+  const w = WORDS.find(x=>x.id===id);
+  if(!w) return;
+  const card = document.getElementById('card-'+id);
+  speak(w.ar + '. ' + w.ex, card);
+}
+
+function buildFilters(){
+  const row = document.getElementById('filterRow');
+  row.innerHTML = Object.entries(CATS).map(([k,v])=>
+    `<button class="ftag${k===currentCat?' active':''}" onclick="setFilter('${k}')">${v.label}</button>`
+  ).join('');
+}
+
+function setFilter(cat){
+  currentCat = cat;
+  buildFilters();
+  renderCards();
+}
+
+function filterCards(){ renderCards(); }
+
+function renderCards(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const filtered = WORDS.filter(w=>{
+    const mc = currentCat==='all' || w.cat===currentCat;
+    const mq = !q || w.ar.includes(q) || w.en.toLowerCase().includes(q) || w.ex.includes(q);
+    return mc && mq;
+  });
+  document.getElementById('countLabel').textContent = filtered.length + ' كلمة';
+  const grid = document.getElementById('cardsGrid');
+  if(!filtered.length){ grid.innerHTML='<div class="no-results">🔍 لا توجد نتائج</div>'; return; }
+
+  const groups = {};
+  filtered.forEach(w=>{ if(!groups[w.cat]) groups[w.cat]=[]; groups[w.cat].push(w); });
+
+  let html = '';
+  (currentCat==='all'?catOrder:[currentCat]).forEach(cat=>{
+    const ws = groups[cat]; if(!ws||!ws.length) return;
+    const cls = CATS[cat]?.cls||'';
+    if(currentCat==='all') html+=`<div class="section-divider"><span>${catNames[cat]||cat}</span></div>`;
+    ws.forEach(w=>{
+      html+=`<div class="card ${cls}" id="card-${w.id}" onclick="playWord(${w.id})">
+        <div class="cat-badge cat-${w.cat}"></div>
+        <div class="card-icon">${w.icon}</div>
+        <div class="card-word">${w.ar}</div>
+        <span class="card-en">${w.en}</span>
+        <div class="card-ex">${w.ex}</div>
+        <button class="audio-btn" onclick="event.stopPropagation();playWord(${w.id})" aria-label="استمع">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+        </button>
+      </div>`;
+    });
+  });
+  grid.innerHTML = html;
+}
+
+if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=()=>{};
+buildFilters();
+renderCards();
+</script>
+</body>
+</html>
